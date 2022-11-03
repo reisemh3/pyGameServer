@@ -20,7 +20,7 @@ class SoundManager:
         self.hit_sound = pygame.mixer.Sound('./assets/sound/Hit.wav')
         self.hit_sound.set_volume(0.6)
         self.hit_cd = 0
-        self.get_item = pygame.mixer.Sound('./assets/sound/get_item.wav')
+        self.get_item = pygame.mixer.Sound('./assets/sound/get_item.mp3')
         self.drop_items = pygame.mixer.Sound('./assets/sound/Explosion2.wav')
         self.passage = pygame.mixer.Sound('./assets/sound/passage.wav')
         self.passage.set_volume(1)
