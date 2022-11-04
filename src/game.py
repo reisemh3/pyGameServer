@@ -42,6 +42,7 @@ class Game:
         pygame.mixer.init()
         self.dt = 0
         self.sound = pygame.mixer.Sound('./assets/sound/dungeon_theme_1.mp3')
+        self.sound.set_volume(0.6)
         self.screen_position = (0, 0)
 
     def refresh(self):
@@ -87,8 +88,8 @@ class Game:
 
         self.player.input()
         pressed = pygame.key.get_pressed()
-        # if pressed[pygame.K_r]:
-        #     self.refresh()
+        if pressed[pygame.K_r]:
+            self.refresh()
 
         if pressed[pygame.K_ESCAPE]:
             if self.game_over.game_over:
