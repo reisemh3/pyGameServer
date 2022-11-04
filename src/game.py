@@ -19,7 +19,6 @@ pygame.mixer.init()
 world_size = (21 * 64, 14 * 64)
 
 
-
 class Game:
     def __init__(self):
         self.display = pygame.display.set_mode(world_size)
@@ -42,7 +41,7 @@ class Game:
         self.game_over = GameOver(self)
         pygame.mixer.init()
         self.dt = 0
-        self.sound = pygame.mixer.Sound('./assets/sound/dungeon_theme_1.flac')
+        self.sound = pygame.mixer.Sound('./assets/sound/dungeon_theme_1.mp3')
         self.screen_position = (0, 0)
 
     def refresh(self):
@@ -73,7 +72,8 @@ class Game:
         self.bullet_manager.draw()
         self.mini_map.draw(self.screen)
         self.hud.draw()
-        self.particle_manager.draw_particles(self.world_manager.current_map.map_surface)
+        self.particle_manager.draw_particles(
+            self.world_manager.current_map.map_surface)
         self.particle_manager.draw_fire_particles()
         self.game_over.draw()
 
