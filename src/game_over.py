@@ -15,7 +15,7 @@ class GameOver:
         self.position = [utils.world_size[0] / 2 - 180, - 800]
         self.hover_value = -5
         self.game_over = False
-        self.sound = pygame.mixer.Sound('./assets/sound/GameOver2.wav')
+        self.sound = pygame.mixer.Sound('./assets/sound/GameOver2.mp3')
         self.played = False
 
     @staticmethod

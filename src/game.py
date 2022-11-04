@@ -42,7 +42,7 @@ class Game:
         self.game_over = GameOver(self)
         pygame.mixer.init()
         self.dt = 0
-        self.sound = pygame.mixer.Sound('./assets/sound/dungeon_theme_1.wav')
+        self.sound = pygame.mixer.Sound('./assets/sound/dungeon_theme_1.flac')
         self.screen_position = (0, 0)
 
     def refresh(self):

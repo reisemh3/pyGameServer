@@ -1,6 +1,6 @@
 import pygame
 import random
-from src.utils import get_mask_rect
+from src.utils import get_mask_rect, time_passed
 from src.objects.object import ShowName
 from src.objects.weapon import AnimeSword, FireSword, Staff
 from src.objects.power_up import ShieldPowerUp, AttackPowerUp
@@ -34,6 +34,7 @@ class Merchant(Entity):
         self.room.tile_map.wall_list.append(self)
         self.dead = False
         self.player_bought = False
+        self.weapon_hurt_cooldown = 0
 
     def load_images(self):
         for i in range(4):
@@ -83,3 +84,7 @@ class Merchant(Entity):
         # self.draw_shadow(self.room.tile_map.map_surface)
         self.draw_shadow(self.room.tile_map.map_surface, 100, (0,0,40, 14), -15 + self.animation_frame,3)
         self.room.tile_map.map_surface.blit(self.image, self.rect)
+    
+    def can_get_hurt_from_weapon(self):
+        if time_passed(self.weapon_hurt_cooldown, self.game.player.attack_cooldown):
+            return False
