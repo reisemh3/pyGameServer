@@ -31,18 +31,18 @@ class Player(Entity):
 
     def input(self):
         pressed = pygame.key.get_pressed()
-        if pressed[pygame.K_w]:
+        if pressed[pygame.K_z]:
             self.direction = 'up'
         if pressed[pygame.K_s]:
             self.direction = 'down'
-        if pressed[pygame.K_a]:
+        if pressed[pygame.K_q]:
             self.direction = 'left'
         if pressed[pygame.K_d]:
             self.direction = 'right'
         if pressed[pygame.K_e] and pygame.time.get_ticks() - self.time > 300:
             self.time = pygame.time.get_ticks()
             self.game.object_manager.interact()
-        if pressed[pygame.K_q] and self.weapon and pygame.time.get_ticks() - self.time > 300:
+        if pressed[pygame.K_a] and self.weapon and pygame.time.get_ticks() - self.time > 300:
             self.time = pygame.time.get_ticks()
             self.weapon.drop()
             if self.items:
@@ -59,18 +59,19 @@ class Player(Entity):
                     self.shift_items_left()
                     self.weapon = self.items[0]
                 elif event.button == 5:
-                    self.weapon = self.items[(self.items.index(self.weapon) + 1) % len(self.items)]
+                    self.weapon = self.items[(self.items.index(
+                        self.weapon) + 1) % len(self.items)]
                     self.shift_items_right()
                     self.weapon = self.items[0]
 
         # constant_dt = 0.06
         constant_dt = self.game.dt
         vel_up = [0, -self.speed * constant_dt]
-        vel_up = [i * pressed[pygame.K_w] for i in vel_up]
+        vel_up = [i * pressed[pygame.K_z] for i in vel_up]
         vel_down = [0, self.speed * constant_dt]
         vel_down = [i * pressed[pygame.K_s] for i in vel_down]
         vel_left = [-self.speed * constant_dt, 0]
-        vel_left = [i * pressed[pygame.K_a] for i in vel_left]
+        vel_left = [i * pressed[pygame.K_q] for i in vel_left]
         vel_right = [self.speed * constant_dt, 0]
         vel_right = [i * pressed[pygame.K_d] for i in vel_right]
         vel = zip(vel_up, vel_down, vel_left, vel_right)
@@ -104,12 +105,14 @@ class Player(Entity):
             self.rect.y += value
         else:
             self.falling = False
-            self.game.sound_manager.play(pygame.mixer.Sound('./assets/sound/Hit.wav'))
+            self.game.sound_manager.play(
+                pygame.mixer.Sound('./assets/sound/Hit.wav'))
 
     def add_walking_particles(self):
         if self.moving():
             self.game.sound_manager.play_walk_sound()
-            self.game.particle_manager.add_particle(Dust(self.game, self, *self.rect.midbottom))
+            self.game.particle_manager.add_particle(
+                Dust(self.game, self, *self.rect.midbottom))
 
     def update(self) -> None:
         if self.falling:
@@ -141,7 +144,8 @@ class Player(Entity):
             self.entity_animation.hurt_timer = pygame.time.get_ticks()
         if self.shield:
             self.shield -= 1
-            self.game.sound_manager.play(pygame.mixer.Sound('./assets/sound/Random1.wav'))
+            self.game.sound_manager.play(
+                pygame.mixer.Sound('./assets/sound/Random1.wav'))
 
     def draw(self, surface):
         if self.death_counter == 0:
